@@ -9,7 +9,7 @@ const ACTIONS={
 }
 const base_url='https://jsearch.p.rapidapi.com/search';
 const headers={
-    'X-RapidAPI-Key': 'f4b8735663mshc281f0aaff3bdf2p192d13jsn6096147407e8',
+    'X-RapidAPI-Key': '4f6566cf60msh2dc9d0429bb4395p178550jsn3df68daa7aed',
     'X-RapidAPI-Host': 'jsearch.p.rapidapi.com'
   }
 function reducer(state,action){
@@ -50,9 +50,9 @@ export default function UseFetchJobs(page,params) {
         axios.get(base_url,{
             cancelToken:cancelToken1.token,
             params: {
-                query: 'Python developer in Texas, USA',
+                query: `${params.query}`,
                 page: `${page}`,
-                num_pages:'1' 
+                num_pages:`${page}` 
               },
             headers: headers
         }).then(res=>{
@@ -67,7 +67,7 @@ export default function UseFetchJobs(page,params) {
         axios.get(base_url,{
             cancelToken:cancelToken2.token,
             params: {
-                query: 'Python developer in Texas, USA',
+                query: `${params.query}`,
                 page: `${page+1}`,
                 num_pages:'1' 
               },
@@ -82,6 +82,6 @@ export default function UseFetchJobs(page,params) {
             cancelToken1.cancel();  // clear listening to the server
             cancelToken2.cancel();  // clear listening to the server
         }
-    },[page])
+    },[page,params])
     return state
 }
